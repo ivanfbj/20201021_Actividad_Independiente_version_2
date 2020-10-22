@@ -1,4 +1,4 @@
-package otroEjercicio;
+package actividad;
 
 public class ControladorMunicipio {
 

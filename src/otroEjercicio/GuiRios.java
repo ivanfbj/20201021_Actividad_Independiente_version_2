@@ -62,4 +62,16 @@ public class GuiRios extends JFrame {
 		GuiRios ventana = new GuiRios();
 	}
 
+	class CantidadMunicipiosRegistrados implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+
+
+			
+
+		}
+	}
+	
+	
+	
+	
 }

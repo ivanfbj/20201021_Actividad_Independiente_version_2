@@ -3,15 +3,15 @@ package otroEjercicio;
 public class Rios {
 
 	private String codigo;
-        private String Nombre;
+	private String Nombre;
 	private double kilometrosDeExtension;
 	private int cantidadDeAfluentes;
 	private String alertaMaxima;
 
 	// Constructor explicito
-	public Rios(String codigo, String Nombre ,double kilometrosDeExtension, int cantidadDeAfluentes, String alertaMaxima) {
+	public Rios(String codigo, String Nombre, double kilometrosDeExtension, int cantidadDeAfluentes, String alertaMaxima) {
 		this.codigo = codigo;
-                this.Nombre = Nombre;
+		this.Nombre = Nombre;
 		this.kilometrosDeExtension = kilometrosDeExtension;
 		this.cantidadDeAfluentes = cantidadDeAfluentes;
 		this.alertaMaxima = alertaMaxima;
@@ -52,7 +52,8 @@ public class Rios {
 
 	@Override
 	public String toString() {
-		return "Codigo: " + codigo +", El nombre de rio es: "+ Nombre+ ", Kilometros de extensio: " + kilometrosDeExtension + ", Cantidad de afluentes: " + cantidadDeAfluentes + ", Alerta maxima: " + alertaMaxima;
+		return "Codigo: " + codigo + ", El nombre de rio es: " + Nombre + ", Kilometros de extensio: " + kilometrosDeExtension + ", Cantidad de afluentes: " + cantidadDeAfluentes + ", Alerta maxima: "
+				+ alertaMaxima;
 	}
-	
+
 }

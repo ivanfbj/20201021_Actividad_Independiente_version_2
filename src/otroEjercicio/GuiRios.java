@@ -6,52 +6,52 @@ import java.awt.event.*;
 
 public class GuiRios extends JFrame {
 
-	JComboBox TemporadaLluvias;
-	JButton Registrar, Municipio, visulizarInformacionRios, mostrarCantidadRios, porcentajeRios;
-	JTextField codigo, Nombre, kilometrosDeExtension, CantidadAfluentes;
-	ControladorRios Controlador = new ControladorRios(10);
+	JComboBox temporadaLluvias;
+	JButton registrar, visulizarInformacionRios, mostrarCantidadRios, porcentajeRios;
+	JTextField codigo, nombre, kilometrosDeExtension, cantidadAfluentes;
+	ControladorRios controlador = new ControladorRios(10);
 
 	public GuiRios() {
 		setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
 
-		add(new JLabel("Codigo:"));
+		add(new JLabel("Código:"));
 		codigo = new JTextField(20);
 		add(codigo);
 
 		add(new JLabel("Nombre:"));
-		Nombre = new JTextField(20);
-		add(Nombre);
+		nombre = new JTextField(20);
+		add(nombre);
 
 		add(new JLabel("Cantidad de afluentes: "));
-		CantidadAfluentes = new JTextField(20);
-		add(CantidadAfluentes);
+		cantidadAfluentes = new JTextField(20);
+		add(cantidadAfluentes);
 
-		add(new JLabel("Kilometros de extension: "));
+		add(new JLabel("Kilometros de extensión: "));
 		kilometrosDeExtension = new JTextField(20);
 		add(kilometrosDeExtension);
 
-		add(new JLabel("Alerta Maxima: "));
-		TemporadaLluvias = new JComboBox();
-		TemporadaLluvias.addItem("Amarilla");
-		TemporadaLluvias.addItem("Naranja");
-		TemporadaLluvias.addItem("Roja");
-		add(TemporadaLluvias);
+		add(new JLabel("Alerta Máxima: "));
+		temporadaLluvias = new JComboBox();
+		temporadaLluvias.addItem("Amarilla");
+		temporadaLluvias.addItem("Naranja");
+		temporadaLluvias.addItem("Roja");
+		add(temporadaLluvias);
 
-		Registrar = new JButton("Registrar");
-		add(Registrar);
-		Registrar.addActionListener(new Boton1());
+		registrar = new JButton("registrar");
+		add(registrar);
+		registrar.addActionListener(new AccionRegistrar());
 
 		mostrarCantidadRios = new JButton("Cantidad de Rios");
 		add(mostrarCantidadRios);
-		mostrarCantidadRios.addActionListener(new Boton2());
+		mostrarCantidadRios.addActionListener(new AccionMostrarCantidadRios());
 
 		visulizarInformacionRios = new JButton("Mostrar informacion de rios");
 		add(visulizarInformacionRios);
-		visulizarInformacionRios.addActionListener(new Boton3());
+		visulizarInformacionRios.addActionListener(new AccionvisualizarInformacionRios());
 
 		porcentajeRios = new JButton("Porcentaje Rios ");
 		add(porcentajeRios);
-		porcentajeRios.addActionListener(new Boton4());
+		porcentajeRios.addActionListener(new AccionPorcetajeRios());
 
 		setSize(300, 500);
 		setVisible(true);
@@ -63,37 +63,42 @@ public class GuiRios extends JFrame {
 		GuiRios ventana = new GuiRios();
 	}
 
-	class Boton1 implements ActionListener {
+	class AccionRegistrar implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 
-			Controlador.anadirRio(codigo.getText(), Nombre.getText(), Double.parseDouble(kilometrosDeExtension.getText()), Integer.parseInt(CantidadAfluentes.getText()),
-					TemporadaLluvias.getSelectedItem().toString());
+			controlador.anadirRio(codigo.getText(), nombre.getText(), Double.parseDouble(kilometrosDeExtension.getText()), Integer.parseInt(cantidadAfluentes.getText()),
+					temporadaLluvias.getSelectedItem().toString());
 			JOptionPane.showMessageDialog(null, "Se registro el rio correctamente");
+			codigo.setText(null);
+			nombre.setText(null);
+			cantidadAfluentes.setText(null);
+			kilometrosDeExtension.setText(null);
+
 		}
 
 	}
 
-	class Boton2 implements ActionListener {
+	class AccionMostrarCantidadRios implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 
-			if (Controlador.getCont() == 1) {
-				JOptionPane.showMessageDialog(null, "En total hay " + Controlador.getCont() + " Rio(s) registrado");
+			if (controlador.getCont() == 1) {
+				JOptionPane.showMessageDialog(null, "En total hay " + controlador.getCont() + " Rio(s) registrado");
 			} else {
-				JOptionPane.showMessageDialog(null, "En total hay " + Controlador.getCont() + " Rio(s) registrados");
+				JOptionPane.showMessageDialog(null, "En total hay " + controlador.getCont() + " Rio(s) registrados");
 			}
 
 		}
 	}
 
-	class Boton3 implements ActionListener {
+	class AccionvisualizarInformacionRios implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 
-			if (Controlador.getCont() > 0) {
+			if (controlador.getCont() > 0) {
 
-				JOptionPane.showMessageDialog(null, Controlador.getRios());
+				JOptionPane.showMessageDialog(null, controlador.getRios());
 			} else {
 				JOptionPane.showMessageDialog(null, "No se han ingresado Rios");
 			}
@@ -101,12 +106,12 @@ public class GuiRios extends JFrame {
 		}
 	}
 
-	class Boton4 implements ActionListener {
+	class AccionPorcetajeRios implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
-			if (Controlador.getCont() > 0) {
+			if (controlador.getCont() > 0) {
 
-				JOptionPane.showMessageDialog(null, "El porcentaje de rios con mas de 10 afluentes es: " + Controlador.PorcentajeRios());
+				JOptionPane.showMessageDialog(null, "El porcentaje de rios con mas de 10 afluentes es: " + controlador.PorcentajeRios() + "%");
 			} else {
 				JOptionPane.showMessageDialog(null, "No se han ingresado rios afluentes");
 			}
